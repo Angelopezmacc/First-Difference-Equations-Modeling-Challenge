@@ -25,9 +25,9 @@ def corruption_model_discrete(budget, corruption_rate, population_needs, investm
     population_needs_history = [population_needs]
 
     for _ in range(num_steps):
-        next_budget = 1 # Falta definir la función
-        next_population_needs = 1 # Falta definir la función
-
+        next_budget = budget - (corruption_rate * budget) + (investment_efficiency * (1 - corruption_rate) * population_needs)
+        next_population_needs = population_needs + (0.02 * population_needs)
+        
         budget = next_budget
         population_needs = next_population_needs
 
