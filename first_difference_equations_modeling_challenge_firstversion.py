@@ -44,12 +44,20 @@ population_needs = 1750000000
 investment_efficiency = 0.05
 nsteps = 1000
 
-# Simulating the model
+# Creating the model
 budget_history, population_needs_history = corruption_model_discrete(initial_budget, corruption_rate,
                                                                     population_needs, investment_efficiency,
                                                                     nsteps)
+# Simulating the model
+sim_time = [i for i in range(len(budget_history))]
+df_sim = pd.DataFrame({'time': sim_time,
+                       'budget': budget_history,
+                       'population_needs': population_needs_history})
 
-# Falta hacer la simulación...
+# Definition of some parameters of the plot
+fig = px.line(df_sim, x='time', y=['budget', 'population_needs'], title='Corruption Dynamics in Colombia')
+fig.update_layout(xaxis_title='Time',
+                  yaxis_title='Amount')
 
 # Creating the plot
-# fig.show(renderer='colab')
+fig.show(renderer='colab')
